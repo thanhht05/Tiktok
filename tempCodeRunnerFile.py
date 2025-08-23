@@ -1,0 +1,1 @@
+https://gateway.golike.net/api/advertising/publishers/tiktok/jobs?account_id={ACCOUNT_ID}&data=null
