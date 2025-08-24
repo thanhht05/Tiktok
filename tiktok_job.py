@@ -3,6 +3,7 @@ import time
 import cloudscraper
 from config import BEARER_TOKEN, ACCOUNT_ID, DEVICE_SERIAL
 from golike_api import report_error
+from color import RED, RESET,GREEN,YELLOW
 
 # Kết nối điện thoại
 d = u2.connect(DEVICE_SERIAL)
@@ -13,10 +14,10 @@ def get_latest_tiktok_job():
     scraper = cloudscraper.create_scraper()
     response = scraper.get(url, headers=headers)
     response.encoding = "utf-8"
-    print(response)
+    print(f'{GREEN}{response}{RESET}')
 
     if response.status_code != 200:
-        print(f"[-] Lỗi khi lấy danh sách job: {response.status_code}")
+        print(f"{RED}[-] Lỗi khi lấy danh sách job: {response.status_code}{RESET}")
         return None
 
     try:
@@ -32,6 +33,7 @@ def get_latest_tiktok_job():
     job_data = json_data["data"]
     print(f"[+] Job ID: {job_data['id']}")
     print(f"[+] Link TikTok: {job_data['link']}")
+    time.sleep(3)
     return job_data
 
 def open_tiktok(url,job_data):
