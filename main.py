@@ -1,11 +1,13 @@
 import time
 from tiktok_job import get_latest_tiktok_job, open_tiktok, click_follow
 from golike_api import complete_job, report_error
-from color import RED, RESET,GREEN,YELLOW
+from color import RED, RESET, GREEN, YELLOW
+
+
 def main():
     n = int(input("Nhập số lần muốn chạy: "))
-    price=0
-    time_success=0
+    price = 0
+    time_success = 0
     for i in range(1, n + 1):
         print(f"\n=== Lần {i}/{n} ===")
         job_data = get_latest_tiktok_job()
@@ -22,8 +24,8 @@ def main():
 
         if success:
             if complete_job(job_data):
-                time_success+=1
-                price+=job_data["price_after_cost"]
+                time_success += 1
+                price += job_data["price_after_cost"]
                 print(f"{YELLOW}[+] Total price: {price}{RESET}")
                 print(f"{GREEN}[+] Số lần thành công: {time_success}/{n}{RESET}")
             else:
@@ -34,11 +36,12 @@ def main():
             report_error(job_data)
 
         print(f"[+] Hoàn tất lần {i}")
-        print("[*] Đợi 5 giây trước khi job tiếp theo...", end="", flush=True)
-        for j in range(5):
+        print("[*] Đợi 10 giây trước khi job tiếp theo...", end="", flush=True)
+        for j in range(10):
             print(".", end="", flush=True)
             time.sleep(1)
         print(" ✅")
+
 
 if __name__ == "__main__":
     main()
